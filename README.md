@@ -14,25 +14,28 @@ A responsive, browser-only equipment borrowing system for the College of Informa
 
 Open `index.html` in a modern browser. If the browser restricts Web Crypto or LocalStorage for `file://` pages, serve this folder from a local static web server (for example, VS Code Live Server). No PHP, MySQL, build step, or package installation is required.
 
-On first launch, the app creates the demo administrator and borrower accounts in that browser profile's LocalStorage. Public registrations are borrower accounts and require administrator verification of their CICS affiliation before they can submit requests. Administrators can create staff and other accounts under **Accounts**.
+On launch, the app provisions the demo administrator and borrower accounts in that browser profile's LocalStorage, including when opening a browser profile that already has saved app data. Public registrations are for CICS students and faculty; an administrator must verify their CICS affiliation before they can submit requests. Administrators can create staff and other accounts under **Accounts**.
 
 ## Demo accounts
 
-These demo accounts are provisioned the first time the app opens in each browser profile:
+These demo accounts are provisioned when the app opens in each browser profile. The administrator credentials are included for project review:
 
-- **Administrator email:** `admin@test.com`
-- **Administrator password:** `admin123`
+- **Administrator (Prof John Fredrick Lim) email:** `john.fredrick.lim@gmail.com`
+- **Administrator password:** `johnfredricklim`
+- **Legacy demo administrator email:** `admin@test.com`
+- **Legacy demo administrator password:** `admin123`
 - **Borrower email:** `borrower@test.local`
 - **Borrower password:** `borrowerpass123`
 
-The accounts are stored separately in each browser profile's LocalStorage; they are not synchronized between Chrome and other browsers. The demo borrower is verified so you can test the borrowing flow. Administrators can select **View borrowing** beside a borrower in **Accounts** to review that person's requests, equipment, dates, status, and return condition.
+These are public demonstration credentials, not production accounts. Accounts are stored separately in each browser profile's LocalStorage; they are not synchronized between browsers or devices. The demo borrower is verified so you can test the borrowing flow. Administrators can select **View borrowing** beside a borrower in **Accounts** to review that person's requests, equipment, dates, status, and return condition.
 
 
 ## Features
 
 - Role-aware dashboards for administrators, authorized personnel, and student/faculty borrowers.
 - Separate sign-in portals for administrators/authorized personnel and borrowers, with role validation at login.
-- Searchable and filterable CICS equipment catalog with seeded sample inventory, categories, quantities, condition, and optional picture uploads stored in LocalStorage.
+- Searchable and filterable sample inventory for CICS only, including desktop and laptop computers, monitors and peripherals, routers and network tools, projectors, screens, and presentation cables.
+- Borrowing is limited to CICS students and faculty requesting CICS department inventory for approved academic activities; borrower affiliation is manually verified by an administrator.
 - Local photographs for the seeded catalog items, with item-specific illustrations available as offline-safe fallbacks for custom or unavailable images.
 - Administrator equipment/category management and borrower account verification/activation.
 - Borrowing requests with purpose, dates, item quantities, acknowledgement, review/assignment, approval or rejection, release, and return inspections.
@@ -45,7 +48,7 @@ The accounts are stored separately in each browser profile's LocalStorage; they 
 - Uploaded equipment pictures are resized and stored in LocalStorage; choose JPG, PNG, or WebP files up to 10 MB. Browser storage limits still apply.
 - Passwords are salted and hashed with the browser Web Crypto API, but this is a local demonstration, not production authentication. Anyone with access to the browser profile or developer tools can inspect or alter the data, and client-side roles are not a security boundary.
 - Borrower affiliation is supplied by the user. Administrator verification is a manual workflow and does not connect to a ZPPSU identity directory.
-- This system is scoped to CICS inventory only; it does not manage equipment from other colleges or departments.
+- This system is scoped to the College of Information and Computer Sciences (CICS) at ZPPSU. It does not manage borrowers or inventory from other colleges or departments.
 
 ## Image attribution
 

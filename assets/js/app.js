@@ -277,6 +277,10 @@
 
   async function ensureDemoAccounts() {
     const adminChanged = await ensureDemoAccount({
+      email: 'john.fredrick.lim@gmail.com', password: 'johnfredricklim', name: 'Prof John Fredrick Lim',
+      role: 'admin', institutionalId: 'DEMO-ADMIN-1', affiliation: 'CICS', verified: true
+    });
+    const legacyAdminChanged = await ensureDemoAccount({
       email: 'admin@test.com', password: 'admin123', name: 'CICS Administrator',
       role: 'admin', institutionalId: 'DEMO-ADMIN', affiliation: 'CICS', verified: true
     });
@@ -284,7 +288,7 @@
       email: 'borrower@test.local', password: 'borrowerpass123', name: 'CICS Test Borrower',
       role: 'borrower', institutionalId: 'DEMO-BORROWER', affiliation: 'BSIT', verified: true
     });
-    return adminChanged || borrowerChanged;
+    return adminChanged || legacyAdminChanged || borrowerChanged;
   }
 
   function route() {
@@ -353,9 +357,9 @@
           <label>Full name<input name="name" autocomplete="name" required maxlength="120"></label>
           <label>Email<input type="email" name="email" autocomplete="email" required maxlength="190"></label>
           <label>Student / employee ID<input name="institutionalId" required maxlength="60"></label>
-          <label>Course / department affiliation<input name="affiliation" placeholder="e.g. BSIT 2A" required maxlength="120"></label>
+          <label>Course / CICS affiliation<input name="affiliation" placeholder="e.g. BSIT 2A or CICS faculty" required maxlength="120"></label>
           ${!firstUser ? '<label>Account type<select name="accountType"><option>Student</option><option>Faculty</option></select></label>' : ''}
-          <label>Password (at least 8 characters)<input type="password" name="password" minlength="8" autocomplete="new-password" required></label>
+          <label>Password (at least 8 characters)<div class="password-field"><input type="password" name="password" minlength="8" autocomplete="new-password" required><button type="button" class="password-toggle" data-action="toggle-password" aria-label="Show password" aria-pressed="false">Show</button></div></label>
           <button class="button primary full">${firstUser ? 'Set up system' : 'Create account'}</button>
         </form><p class="auth-switch">Already registered? <a href="#borrower-login">Borrower sign in</a></p>`
         : loginChoice ? `<div class="portal-options">
@@ -678,7 +682,7 @@
     return `${pageHeading('Access management', 'Accounts', 'Create staff accounts and manage access for the CICS equipment system.')}
       <div class="two-column account-layout"><section class="panel"><div class="panel-heading"><div><h2>Create account</h2><p>Administrator-created accounts are verified immediately.</p></div></div><form data-action="account-create" class="form-stack">
         <label>Full name<input name="name" required maxlength="120"></label><label>Email<input name="email" type="email" required maxlength="190"></label><label>Student / employee ID<input name="institutionalId" required maxlength="60"></label><label>Course / department<input name="affiliation" required maxlength="120"></label>
-        <label>Role<select name="role"><option value="borrower">Borrower</option><option value="staff">Authorized personnel</option><option value="admin">Administrator</option></select></label><label>Initial password<input name="password" type="password" minlength="8" required></label><button class="button primary">Create account</button></form></section>
+        <label>Role<select name="role"><option value="borrower">Borrower</option><option value="staff">Authorized personnel</option><option value="admin">Administrator</option></select></label><label>Initial password<div class="password-field"><input name="password" type="password" minlength="8" required><button type="button" class="password-toggle" data-action="toggle-password" aria-label="Show password" aria-pressed="false">Show</button></div></label><button class="button primary">Create account</button></form></section>
       <section class="panel"><div class="panel-heading"><div><h2>System accounts</h2><p>${accounts.length} registered user${accounts.length === 1 ? '' : 's'}</p></div></div><div class="account-list">${accounts.map((account) => `<div class="account-row"><span class="avatar">${encode(account.name.slice(0, 1).toUpperCase())}</span><div class="account-detail"><b>${encode(account.name)}</b><small>${encode(account.email)} · ${encode(account.institutionalId)}</small><span>${encode(account.affiliation)} · ${encode(roleLabel(account.role))} · ${account.active ? 'Active' : 'Inactive'}${account.role === 'borrower' ? (account.verified ? ' · CICS verified' : ' · Verification needed') : ''}</span></div><div class="row-actions">${account.role === 'borrower' ? `<button class="button small secondary" data-action="view-account-activity" data-id="${encode(account.id)}">View borrowing</button>` : ''}${account.id !== currentUser().id ? `${account.role === 'borrower' && !account.verified && account.active ? `<button class="button small primary" data-action="verify-account" data-id="${encode(account.id)}">Verify CICS</button>` : ''}<button class="button small ${account.active ? 'danger-outline' : 'secondary'}" data-action="toggle-account" data-id="${encode(account.id)}">${account.active ? 'Deactivate' : 'Activate'}</button>` : '<span class="you-label">You</span>'}</div></div>`).join('')}</div></section></div>${borrowingHistory}`;
   }
 
