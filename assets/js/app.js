@@ -342,8 +342,9 @@
     const portal = page === 'admin-login' ? 'admin' : page === 'borrower-login' ? 'borrower' : '';
     document.body.className = 'auth-body';
     return `<main class="auth-shell">
-      <section class="auth-brand"><div class="brand-mark">C</div><p class="eyebrow">ZPPSU · College of Information and Computer Sciences</p><h1>Equipment,<br>checked in.</h1><p>One place to request, release, and return CICS laboratory equipment.</p><div class="auth-foot">CICS Equipment Borrowing Management System</div></section>
+      <section class="auth-brand"><div class="logo-pair"><img src="assets/images/zppsu-logo.png" alt="Zamboanga Peninsula Polytechnic State University logo"><img class="logo-cics" src="assets/images/cics-logo.png" alt="College of Information and Computing Sciences logo"></div><p class="eyebrow">ZPPSU · College of Information and Computer Sciences</p><h1>Equipment,<br>checked in.</h1><p>One place to request, release, and return CICS laboratory equipment.</p><div class="auth-foot">CICS Equipment Borrowing Management System</div></section>
       <section class="auth-panel"><div class="auth-card">
+        <div class="auth-logos-mobile"><img src="assets/images/zppsu-logo.png" alt="ZPPSU logo"><img src="assets/images/cics-logo.png" alt="CICS logo"></div>
         ${displayNotice()}
         <p class="eyebrow">${register ? (firstUser ? 'Initial setup' : 'CICS community') : portal ? (portal === 'admin' ? 'Administrator & personnel portal' : 'Borrower portal') : 'CICS equipment desk'}</p>
         <h2>${register ? (firstUser ? 'Create administrator' : 'Create your account') : loginChoice ? 'Choose your sign-in' : portal === 'admin' ? 'Administrator sign in' : portal === 'borrower' ? 'Borrower sign in' : 'Welcome back'}</h2>
@@ -384,7 +385,7 @@
     document.body.className = 'app-body';
     const unread = state.notifications.filter((item) => item.userId === user.id && !item.read).length;
     return `<div class="layout">
-      <aside class="sidebar" id="sidebar"><a class="brand" href="#dashboard"><span class="brand-mark small">C</span><span><b>CICS</b><small>Equipment Desk</small></span></a>
+      <aside class="sidebar" id="sidebar"><a class="brand" href="#dashboard"><span class="logo-pair"><img src="assets/images/zppsu-logo.png" alt="ZPPSU logo"><img class="logo-cics" src="assets/images/cics-logo.png" alt="CICS logo"></span><span><b>CICS</b><small>Equipment Desk</small></span></a>
         <div class="nav-label">WORKSPACE</div><nav class="nav-links">
           ${navLink('dashboard', 'Dashboard', '▦', page)}
           ${navLink('equipment', 'Equipment', '▤', page)}

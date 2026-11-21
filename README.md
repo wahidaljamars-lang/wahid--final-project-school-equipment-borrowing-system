@@ -1,5 +1,13 @@
 # CICS School Equipment Borrowing Management System
 
+## Team Members
+
+- Teyshan Kyle Silveo
+- January Heaven Chiong
+- Aljamar Wahid
+- Karil Narma
+- Carl Williamson H. Maani
+
 A responsive, browser-only equipment borrowing system for the College of Information and Computer Sciences (CICS) at Zamboanga Peninsula Polytechnic State University (ZPPSU). The app uses HTML, CSS, vanilla JavaScript, and browser LocalStorage; it has no server, framework, or database dependency.
 
 ## Run the application
@@ -42,5 +50,3 @@ The accounts are stored separately in each browser profile's LocalStorage; they 
 ## Image attribution
 
 The seeded equipment photographs are used from Unsplash under the [Unsplash License](https://unsplash.com/license). Original SVG illustrations remain embedded in the application as offline fallbacks for custom items or missing images.
-
-
